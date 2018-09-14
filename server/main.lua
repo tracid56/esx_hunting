@@ -7,14 +7,14 @@ AddEventHandler('esx-qalle-hunting:reward', function(Weight)
     local xPlayer = ESX.GetPlayerFromId(source)
 
     if Weight >= 1 then
-        xPlayer.addInventoryItem('meat', 1)
+        xPlayer.addInventoryItem('viande', 1)
     elseif Weight >= 9 then
-        xPlayer.addInventoryItem('meat', 2)
+        xPlayer.addInventoryItem('viande', 2)
     elseif Weight >= 15 then
-        xPlayer.addInventoryItem('meat', 3)
+        xPlayer.addInventoryItem('viande', 3)
     end
 
-    xPlayer.addInventoryItem('leather', math.random(1, 4))
+    xPlayer.addInventoryItem('cuir', math.random(1, 4))
         
 end)
 
@@ -25,18 +25,18 @@ AddEventHandler('esx-qalle-hunting:sell', function()
     local MeatPrice = 125
     local LeatherPrice = 25
 
-    local MeatQuantity = xPlayer.getInventoryItem('meat').count
-    local LeatherQuantity = xPlayer.getInventoryItem('leather').count
+    local MeatQuantity = xPlayer.getInventoryItem('viande').count
+    local LeatherQuantity = xPlayer.getInventoryItem('cuir').count
 
     if MeatQuantity > 0 or LeatherQuantity > 0 then
         xPlayer.addMoney(MeatQuantity * MeatPrice)
         xPlayer.addMoney(LeatherQuantity * LeatherPrice)
 
-        xPlayer.removeInventoryItem('meat', MeatQuantity)
-        xPlayer.removeInventoryItem('leather', LeatherQuantity)
-        TriggerClientEvent('esx:showNotification', xPlayer.source, 'You sold ' .. LeatherQuantity + MeatQuantity .. ' and earned $' .. LeatherPrice * LeatherQuantity + MeatPrice * MeatQuantity)
+        xPlayer.removeInventoryItem('viande', MeatQuantity)
+        xPlayer.removeInventoryItem('cuir', LeatherQuantity)
+        TriggerClientEvent('esx:showNotification', xPlayer.source, 'Vous avez vendu ' .. LeatherQuantity + MeatQuantity .. ' et gagné $' .. LeatherPrice * LeatherQuantity + MeatPrice * MeatQuantity)
     else
-        TriggerClientEvent('esx:showNotification', xPlayer.source, 'You don\'t have any meat or leather')
+        TriggerClientEvent('esx:showNotification', xPlayer.source, 'Tu as plus rien à vendre...')
     end
         
 end)
